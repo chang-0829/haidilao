@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light">
-<meta name="theme-color" content="#F8F7F4">
+<meta name="theme-color" content="#FAF8F7">
 <meta name="description" content="台灣海底撈會員成長值紀錄：四級解鎖、12 個月滾動計算、升級與保級預測。資料存在本機。">
-<title>撈點日記｜海底撈成長值管家</title>
+<title>撈點日記｜海底撈成長值管家 V3</title>
 <style>
 :root{--bg:#f8f7f4;--panel:#fff;--line:#e9e9e4;--ink:#26342e;--muted:#7b867e;--green:#285a46;--green2:#edf5ef;--lime:#d1e0b8;--rose:#b96f65;--rosebg:#fbf0ed;--gold:#9a7335;--goldbg:#faf3e6;--shadow:0 12px 40px rgba(33,42,34,.035);--round:22px}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--bg);font-family:Inter,-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;font-size:14px;line-height:1.55}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.5}a{color:inherit}input,select,textarea{width:100%;min-width:0;border:1px solid #e0e6df;border-radius:12px;padding:11px 12px;background:#fff;color:var(--ink);outline:0}input:focus,select:focus,textarea:focus{border-color:#82aa90;box-shadow:0 0 0 3px #e6f1e7}textarea{resize:vertical;min-height:74px}[hidden]{display:none!important}
@@ -22,6 +22,188 @@
 @media(max-width:1090px){.app{grid-template-columns:205px 1fr}.main{padding:27px 22px 58px}.stats{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}.tiermini{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:720px){.app{display:block}.sidebar{display:none}.main{padding:22px 15px calc(110px + env(safe-area-inset-bottom));max-width:600px}.pagehead{align-items:flex-start;margin-bottom:18px}.pagehead h1{font-size:24px}.pagehead .btn{padding:9px 11px;font-size:11px}.hero{padding:23px 22px;min-height:226px;border-radius:23px}.herovalue strong{font-size:48px}.hero:before{right:-148px}.stats{gap:10px}.stat{padding:15px;border-radius:15px}.stat b{font-size:22px}.card{padding:18px;border-radius:18px}.tiersgrid{grid-template-columns:1fr}.tiermini{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.tierstep{padding:11px 2px}.tierstep b{font-size:11px}.tierstep small{font-size:9px}.forecast-summary{grid-template-columns:1fr 1fr}.forecast-summary .forecast-kpi:last-child{grid-column:1/-1}.mobilebar{display:flex;position:fixed;bottom:0;left:0;right:0;height:calc(72px + env(safe-area-inset-bottom));padding:7px 10px calc(8px + env(safe-area-inset-bottom));gap:4px;background:#ffffffee;backdrop-filter:blur(14px);border-top:1px solid #e9eee7;z-index:80}.mobbtn{border:0;border-radius:13px;background:transparent;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:#88988c;font-size:10px;font-weight:750}.mobbtn.active{color:var(--green);background:#eff5ed}.mobbtn span:first-child{font-size:20px;line-height:1.2}.toast{bottom:calc(88px + env(safe-area-inset-bottom))}.pagehead .topbadge{display:none}}
 @media(max-width:390px){.formgrid{grid-template-columns:1fr}.tiercard{padding:15px}.stats .stat b{font-size:19px}}
+
+/* V3 ───────── A warmer editorial palette and colorful dashboard ───────── */
+:root{
+  --bg:#faf8f7;--panel:#fff;--line:#ede8e7;--ink:#292c38;--muted:#81818b;
+  --green:#b84f5d;--green2:#fff1f0;--lime:#ffddd3;--rose:#ba5263;
+  --rosebg:#fff0ed;--gold:#ac7b43;--goldbg:#fff4df;
+  --shadow:0 7px 28px rgba(56,43,56,.035);--round:22px;
+  --accent:#b84f5d;--accent-bg:#fff1f0;
+}
+body{background:var(--bg);color:var(--ink);letter-spacing:.01em}
+input,select,textarea{border-color:#e9e5e5;background:#fff;color:#333441}
+input:focus,select:focus,textarea:focus{border-color:#cb7682;box-shadow:0 0 0 3px rgba(206,112,126,.14)}
+button:focus-visible,a:focus-visible{outline:3px solid #eaa0a4;outline-offset:3px}
+::selection{background:#f5c8ca;color:#5d333d}
+.sidebar{background:#fffdfa;border-right:1px solid #f0e8e7}
+.brandlogo{background:#c8525d;border-radius:14px;box-shadow:0 10px 25px rgba(185,69,83,.18)}
+.brandname{color:#37323b;letter-spacing:-.55px}
+.brandsub{color:#ad9ba2}
+.side-label{color:#b3a7a8}
+.navbtn{color:#7d7881;transition:background .15s,color .15s}
+.navbtn:hover{background:#fcf0f1}
+.navbtn.active{background:#fceced;color:#af4354;box-shadow:inset 3px 0 0 #d46d7a}
+.privacy{border-color:#f2e7e5;color:#a39a9b}
+.statusdot{background:#63b18e}
+.main{max-width:1320px}
+.pagehead h1{color:#2a2934;letter-spacing:-1.15px;font-weight:860}
+.eyebrow{color:#b88891;font-weight:800;letter-spacing:2.4px}
+.topbadge{background:#fff0f0;color:#a94d5b;border:1px solid #f6dddd}
+.sub,.sectionhead p{color:#93909a}
+.btn{border-color:#eee5e5;color:#504850;background:#fff;border-radius:12px}
+.btn:hover{background:#fff7f7}
+.btn.primary{background:#c55764;border-color:#c55764;color:#fff;box-shadow:0 8px 19px rgba(182,69,86,.14)}
+.btn.primary:hover{background:#ab4253}
+.btn.soft{background:#fff0ee;color:#b84f5d}
+.btn.danger{color:#b24d58}
+.card{border:1px solid #f0e9e7;background:#fff;box-shadow:var(--shadow)}
+.card h2,.card h3{color:#302e39}
+.card .helper{color:#97909a}
+.sectionhead h2{color:#37313d}
+/* Hero reacts to the currently achieved tier, while retaining contrast. */
+.hero{
+  --hero1:#8d404f;--hero2:#482e43;--heroglow:#eaa9ac;--herotrack:#ffc9c1;
+  background:radial-gradient(circle at 92% 18%,rgba(255,255,255,.14),transparent 35%),linear-gradient(118deg,var(--hero1),var(--hero2));
+  border:1px solid rgba(255,255,255,.14);box-shadow:0 15px 37px rgba(89,45,64,.15);
+  border-radius:26px;padding:31px 33px;
+}
+.hero.tier-red{--hero1:#a14a59;--hero2:#542c42;--heroglow:#f9c2bd;--herotrack:#fbd0c3}
+.hero.tier-silver{--hero1:#65788f;--hero2:#354559;--heroglow:#bed8ed;--herotrack:#d9e8f4}
+.hero.tier-gold{--hero1:#ad8052;--hero2:#604d49;--heroglow:#ffe7ad;--herotrack:#ffdf93}
+.hero.tier-black{--hero1:#474556;--hero2:#1c2434;--heroglow:#dcc7ed;--herotrack:#efc6a6}
+.hero:before{right:-74px;top:-122px;width:360px;height:360px;border:1px solid rgba(255,255,255,.23);box-shadow:0 0 0 59px rgba(255,255,255,.055),0 0 0 138px rgba(255,255,255,.025)}
+.hero:after{content:'✦';position:absolute;right:61px;bottom:48px;color:var(--heroglow);opacity:.55;font-size:37px;line-height:1}
+.herolabel{color:#ffe8e6;opacity:.88;font-weight:600}
+.herotop .chip{color:#fff;background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.28);font-weight:740;backdrop-filter:blur(10px)}
+.herovalue{margin:22px 0 4px}
+.herovalue strong{font-weight:860}
+.herovalue span,.herosub{color:#fce5e4}
+.hero.tier-silver .herovalue span,.hero.tier-silver .herosub,.hero.tier-black .herovalue span,.hero.tier-black .herosub{color:#e4e7f0}
+.track{background:rgba(255,255,255,.24);height:8px}
+.track i{background:var(--herotrack)}
+.tracklabels{color:rgba(255,255,255,.83)}
+/* Four dashboard stats: four deliberate, distinct pastel stories. */
+#page-home .stats{gap:14px;margin:18px 0 4px}
+#page-home .stat{
+  min-height:142px;padding:21px 21px 19px;border-radius:20px;
+  position:relative;isolation:isolate;overflow:hidden;
+  border:1px solid transparent;box-shadow:0 7px 24px rgba(64,48,62,.032);
+}
+#page-home .stat::before{
+  position:absolute;right:17px;top:14px;width:35px;height:35px;display:grid;place-items:center;
+  border-radius:12px;font-size:19px;font-weight:700;line-height:1;
+}
+#page-home .stat:nth-child(1){background:#fff0e9;border-color:#f9e1d9;color:#8f5049}
+#page-home .stat:nth-child(1)::before{content:'＄';background:#ffe0d3;color:#ae665b}
+#page-home .stat:nth-child(2){background:#eeeafb;border-color:#e3ddf5;color:#69538c}
+#page-home .stat:nth-child(2)::before{content:'✦';background:#e0d8f6;color:#77609b}
+#page-home .stat:nth-child(3){background:#ebf3ff;border-color:#dce9f8;color:#486a91}
+#page-home .stat:nth-child(3)::before{content:'◇';background:#d9e8fb;color:#567ca5}
+#page-home .stat:nth-child(4){background:#e9f6f0;border-color:#d7eddf;color:#487666}
+#page-home .stat:nth-child(4)::before{content:'◷';background:#d4eade;color:#51816c}
+#page-home .stat .stat-label{font-weight:700;color:inherit;opacity:.87;padding-right:33px}
+#page-home .stat b{font-size:clamp(22px,2.15vw,29px);font-weight:840;letter-spacing:-1.2px;margin:9px 0 6px;color:inherit}
+#page-home .stat .stat-foot{font-size:10px;color:inherit;opacity:.7;line-height:1.5}
+/* Color-coded progress cards remain distinct, including locked tiers. */
+.tiermini{gap:10px}
+.tierstep{border:1px solid transparent;border-radius:17px;padding:16px 8px;box-shadow:0 5px 20px rgba(53,47,64,.025);transition:transform .2s,opacity .2s}
+.tierstep:hover{transform:translateY(-2px)}
+.tierstep.red{background:#fff0ed;border-color:#f8d9d5;color:#b45d63}
+.tierstep.silver{background:#eef2fa;border-color:#dce5ef;color:#74849d}
+.tierstep.gold{background:#fff4e3;border-color:#f6e4c8;color:#ac7a43}
+.tierstep.black{background:#343747;border-color:#343747;color:#fff}
+.tierstep .symbol{width:37px;height:37px;border-radius:13px;font-size:19px;background:rgba(255,255,255,.6)}
+.tierstep.red .symbol{background:#ffdad5;color:#ae505b}
+.tierstep.silver .symbol{background:#dfe5f0;color:#667b9b}
+.tierstep.gold .symbol{background:#f9e3b8;color:#a87735}
+.tierstep.black .symbol{background:rgba(255,255,255,.13);color:#f7ded0}
+.tierstep b{color:inherit;font-size:12px}
+.tierstep small{color:inherit;opacity:.72;font-weight:600}
+.tierstep.locked{opacity:.73}
+.tierstep.black.locked{opacity:.82}
+/* Two financial projection cards have separate hues too. */
+#page-home > .grid2 > .card:nth-child(1){background:#fffbf1;border-color:#f4ead7}
+#page-home > .grid2 > .card:nth-child(2){background:#f3f0fd;border-color:#e8e1f6}
+#page-home > .grid2 > .card:nth-child(1) .min-cost{color:#96633e}
+#page-home > .grid2 > .card:nth-child(2) #homeReviewTier{color:#69548e}
+#page-home > .grid2 > .card:nth-child(1) .softnote{background:#fff9eb;border-color:#f2e6ca;color:#8b775e}
+#page-home > .grid2 > .card:nth-child(1) .kv{border-color:#ede4d2}
+#page-home > .grid2 > .card:nth-child(2) .kv{border-color:#e5dff2}
+.labelchip{background:#f5f1f4;color:#7d7380}
+.labelchip.good{background:#e4f4e9;color:#477c63}
+.labelchip.warn{background:#fff0d9;color:#9c6d3d}
+.labelchip.faded{background:#f4f1f3;color:#9a929a}
+.softnote{background:#faf8f7;border-color:#f2eae9;color:#79747b}
+.softnote.warn{background:#fff7e9;border-color:#f3e6ce;color:#97764c}
+.softnote.danger{background:#fff0ef;border-color:#f1d8d5;color:#ad5b5b}
+.result{background:#fff0ef;border:1px solid #f3dfdd}
+.result b{color:#b65362}
+.result small{color:#9d8085}
+.field label{color:#6d6871}
+.field small{color:#9c929a}
+.record{border-color:#efe8e7}
+.recordicon{background:#fff0ed;color:#ba5661}
+.recordnums b{color:#b65362}
+.recordmeta,.recordnums small{color:#96919a}
+.recordbottom{border-color:#f1e9e9}
+.textbtn{color:#a45061}
+.tiercard{border-color:#efe7e6;box-shadow:var(--shadow);background:#fff}
+.tiercard.red{background:#fff5f3;border-color:#f6e1dc}
+.tiercard.silver{background:#f6f8fc;border-color:#e4eaf4}
+.tiercard.gold{background:#fffbf2;border-color:#f4e8d0}
+.tiercard.black{background:#343846;color:#fff;border-color:#343846}
+.tiercard.black h3,.tiercard.black .range{color:#fff}
+.tiercard.black p,.tiercard.black .tier-card-footer{color:#e2dce8}
+.tiercard.black .tier-card-footer{border-color:rgba(255,255,255,.18)}
+.tiercard.red .tiersymbol{background:#f9ddd9;color:#ae4b59}
+.tiercard.silver .tiersymbol{background:#e2e9f3;color:#7183a1}
+.tiercard.gold .tiersymbol{background:#f8e6c6;color:#a47238}
+.tiercard.black .tiersymbol{background:rgba(255,255,255,.12);color:#ffe5cd}
+.mline:after{background:#e8dfe0}
+.mdot{border-color:#d7cbd0}
+.milestone.achieved .mdot{background:#be5965;border-color:#be5965}
+.projection-table th{color:#9b919a}
+.projection-table td{border-color:#f2eded}
+.barpair i{background:#e3e2f3}
+.barpair i.plan{background:#c7818b}
+.forecast-kpi{border:1px solid transparent;border-radius:17px;padding:19px}
+.forecast-kpi:nth-child(1){background:#fff0e9;color:#9c6154}
+.forecast-kpi:nth-child(2){background:#edf1fd;color:#58739b}
+.forecast-kpi:nth-child(3){background:#eaf5ee;color:#5d7b68}
+.forecast-kpi label,.forecast-kpi small{color:inherit;opacity:.8}
+.forecast-kpi b{color:inherit}
+.toast{background:#343140}
+.credit{color:#aa9fa4}
+.mobile-masthead{display:none}
+@media(max-width:1090px){#page-home .stats{gap:11px}#page-home .stat{min-height:128px}}
+@media(max-width:720px){
+  .main{padding-top:16px}
+  .mobile-masthead{display:flex;align-items:center;gap:9px;margin-bottom:23px;padding:1px 1px 14px;border-bottom:1px solid #f0e8e7}
+  .mobile-mark{width:31px;height:31px;border-radius:11px;background:#c65764;color:#fff;font-size:17px;font-weight:800;display:grid;place-items:center}
+  .mobile-masthead strong{font-size:13px;display:block;line-height:1.3;color:#38313a}
+  .mobile-masthead small{font-size:8px;letter-spacing:1.15px;color:#b1a3aa;display:block;margin-top:1px}
+  .mobile-masthead-dot{margin-left:auto;width:7px;height:7px;background:#d29d9d;border-radius:50%}
+  .hero{padding:25px 23px;min-height:229px;border-radius:22px}
+  .hero:after{right:34px;bottom:49px;font-size:26px}
+  .hero:before{right:-153px}
+  #page-home .stats{gap:10px;margin-top:12px}
+  #page-home .stat{padding:16px 15px;min-height:125px;border-radius:17px}
+  #page-home .stat::before{right:12px;top:12px;width:29px;height:29px;border-radius:10px;font-size:16px}
+  #page-home .stat b{font-size:24px;margin:10px 0 6px}
+  #page-home .stat .stat-label{font-size:11px;padding-right:24px}
+  #page-home .stat .stat-foot{font-size:9px}
+  .tiermini{gap:6px}
+  .tierstep{padding:12px 3px;border-radius:13px}
+  .tierstep .symbol{width:31px;height:31px;font-size:16px;border-radius:10px}
+  .mobilebar{background:rgba(255,252,251,.94);border-color:#f1e7e5;box-shadow:0 -6px 30px rgba(79,59,65,.04)}
+  .mobbtn{color:#a19aa1}
+  .mobbtn.active{color:#b54c5c;background:#faeaea}
+  .mobbtn span:first-child{font-size:19px}
+  .sectionhead{margin-top:27px}
+}
+@media(max-width:390px){#page-home .stat b{font-size:20px}#page-home .stat{padding:13px 12px}.hero{padding:21px 19px}}
+@media(prefers-reduced-motion:reduce){.page,.tierstep,.track i{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -38,6 +220,7 @@
     <div class="sidebottom"><div class="privacy"><span class="statusdot" id="storageDot"></span><span id="storageState">已啟用瀏覽器本機儲存</span><br>資料不會上傳伺服器；請定期備份。</div></div>
   </aside>
   <main class="main">
+    <div class="mobile-masthead" aria-label="撈點日記"><span class="mobile-mark">撈</span><div><strong>撈點日記</strong><small>HAIDILAO GROWTH DIARY</small></div><span class="mobile-masthead-dot" aria-hidden="true"></span></div>
     <section class="page active" id="page-home" aria-labelledby="homeTitle">
       <div class="pagehead"><div><div class="eyebrow">MY DASHBOARD</div><h1 id="homeTitle">我的成長旅程</h1><p class="sub" id="todayText">從 0 點開始，逐步解鎖四個會員等級</p></div><button type="button" class="btn primary small" data-page="entry">＋ 記一筆</button></div>
       <div class="hero"><div class="herotop"><div class="herolabel">近 12 個月成長值</div><span class="chip" id="homeTier">紅海會員</span></div><div class="herovalue"><strong id="homePoints">0</strong><span>Growth Points</span></div><div class="herosub" id="homeSub">距離銀海會員還差 2,500 點</div><div class="track"><i id="homeBar"></i></div><div class="tracklabels"><span id="homeProgress">0 / 2,500</span><span id="homePercent">0%</span></div></div>
@@ -179,6 +362,7 @@
   function empty(text='還沒有任何消費紀錄',action=true){return `<div class="empty"><div class="emptyicon">♨</div><b>${safe(text)}</b><p>手動補登過往消費或新增今天的紀錄，就能看見成長進度</p>${action?'<button type="button" class="btn soft small" data-page="entry">＋ 新增消費</button>':''}</div>`;}
   function renderHome(){
     const now=localISO(),points=rolling(now),lvl=level(points),next=Math.min(lvl+1,3),goal=threshold(next),needed=Math.max(0,goal-points),ach=achievements();
+    document.querySelector('#page-home .hero').className='hero tier-'+colors[lvl];
     $('todayText').textContent=`截至 ${now} · 資料依每筆消費日期計算`;
     $('homeTier').textContent=tierName(lvl)+' · 試算';$('homePoints').textContent=fmt(points);
     $('homeSub').textContent=lvl===3?'已達黑海門檻，記得留意保級日期':`距離${tierName(next)}還差 ${fmt(needed)} 點`;
