@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#A14A59">
 <meta name="description" content="台灣海底撈會員成長值紀錄：四級解鎖、12 個月滾動計算、升級與保級預測。資料存在本機。">
-<title>撈點日記｜我的海底撈專屬管家</title>
+<title>撈點日記｜我的海底撈專屬管家 V5</title>
 <style>
 :root{--bg:#f8f7f4;--panel:#fff;--line:#e9e9e4;--ink:#26342e;--muted:#7b867e;--green:#285a46;--green2:#edf5ef;--lime:#d1e0b8;--rose:#b96f65;--rosebg:#fbf0ed;--gold:#9a7335;--goldbg:#faf3e6;--shadow:0 12px 40px rgba(33,42,34,.035);--round:22px}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--bg);font-family:Inter,-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;font-size:14px;line-height:1.55}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.5}a{color:inherit}input,select,textarea{width:100%;min-width:0;border:1px solid #e0e6df;border-radius:12px;padding:11px 12px;background:#fff;color:var(--ink);outline:0}input:focus,select:focus,textarea:focus{border-color:#82aa90;box-shadow:0 0 0 3px #e6f1e7}textarea{resize:vertical;min-height:74px}[hidden]{display:none!important}
@@ -293,6 +293,40 @@ input[hidden]{display:none!important}
 .business-preview p{margin:0}
 @media(max-width:840px){.contacts-grid{grid-template-columns:1fr}}
 
+
+/* V5: consistent visible iOS date/month controls, independent of native date text metrics. */
+.formgrid .field>label{display:block;height:20px;line-height:20px;margin:0}
+.date-shell{
+  position:relative;display:flex;align-items:center;width:100%;height:48px;min-height:48px;
+  padding:0 39px 0 13px;min-width:0;overflow:hidden;box-sizing:border-box;
+  border:1px solid #e7e2e4;border-radius:12px;background:#fff;
+}
+.date-shell:focus-within{border-color:var(--rank);box-shadow:0 0 0 3px var(--rank-shadow)}
+.date-face{display:block;min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  font:400 16px/1.4 -apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC",sans-serif;
+  color:var(--ink);font-variant-numeric:tabular-nums;pointer-events:none}
+.date-shell-icon{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:#94858d;pointer-events:none}
+input.date-native:not([type="checkbox"]):not([type="file"]){
+ position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;
+ min-height:0!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;
+ background:transparent!important;opacity:0!important;z-index:2;cursor:pointer;-webkit-appearance:none!important;appearance:none!important;
+ box-shadow:none!important;-webkit-tap-highlight-color:transparent;
+}
+input.date-native::-webkit-calendar-picker-indicator{width:100%;height:100%;position:absolute;inset:0;opacity:0;cursor:pointer}
+/* Expandable, compact breakdown on the homepage. */
+.plan-details{border:1px solid var(--rank-border);background:#ffffff90;border-radius:14px;margin:13px 0 12px;overflow:hidden}
+.plan-details summary{cursor:pointer;list-style:none;padding:12px 14px;font-size:12px;font-weight:750;color:var(--rank-text);display:flex;align-items:center;justify-content:space-between;gap:8px}
+.plan-details summary::-webkit-details-marker{display:none}
+.plan-details summary .ico{width:15px;height:15px;transition:transform .2s;opacity:.8}
+.plan-details[open] summary .ico{transform:rotate(180deg)}
+#homePlanBreakdown{padding:0 14px 13px;font-size:12px;color:var(--rank-text)}
+.plan-line{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px solid var(--rank-border)}
+.plan-line .explain{display:block;font-size:11px;opacity:.74;margin-top:2px}
+.plan-line strong{font-variant-numeric:tabular-nums;white-space:nowrap}
+.plan-total{font-weight:800}
+.plan-formula{padding:9px 10px;margin-top:6px;background:#ffffffb8;border-radius:9px;font-size:11px;line-height:1.65}
+@media(max-width:390px){.date-shell{padding-left:11px;padding-right:31px}.date-face{font-size:14px}.date-shell-icon{right:9px;width:16px;height:16px}}
+
 </style>
 </head>
 <body data-tier="red">
@@ -305,6 +339,7 @@ input[hidden]{display:none!important}
   <symbol id="i-contact" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="12" cy="10" r="3"/><path d="M7 18c.2-2 1.9-3.4 5-3.4s4.8 1.4 5 3.4"/></symbol>
   <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
   <symbol id="i-wallet" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="15" rx="2"/><path d="M3 9V5a2 2 0 0 1 2-2h13M16 14h5"/><circle cx="16.5" cy="14" r=".5" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
   <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h3M8 17h6"/></symbol>
   <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
   <symbol id="i-users" viewBox="0 0 24 24"><circle cx="10" cy="8" r="3"/><path d="M4 20v-2a6 6 0 0 1 12 0v2M17 4a3 3 0 0 1 0 6M18 14c2 0 3 2 3 4v2"/></symbol>
@@ -343,7 +378,7 @@ input[hidden]{display:none!important}
       <div class="sectionhead"><div><h2>四海會員解鎖進度</h2><p>已解鎖的里程碑會保留，當前等級仍會依近 12 個月變動</p></div><button class="btn small" type="button" data-page="tiers">詳細等級</button></div>
       <div class="tiermini" id="homeTiers"></div>
       <div class="sectionhead"><div><h2>升級攻略</h2><p>依目前成長值規劃下一階段花費</p></div></div>
-      <div class="grid2"><div class="card"><div class="headingrow"><h3>下一個目標</h3><span class="labelchip good" id="homeNextLabel">銀海會員</span></div><div class="min-cost" id="homeCost">NT$ 6,250</div><p class="tiny" id="homePlan">分次達到滿額門檻，能更快累積成長值。</p><div class="kv"><span>升上黑海的建議花費</span><b id="homeBlackCost">—</b></div><div class="softnote">依每次滿額獎勵與消費換點規則計算；可依最新入帳自行調整紀錄。</div></div><div class="card"><div class="headingrow"><h3>下一次會員定級</h3><span class="labelchip" id="homeReviewDate">—</span></div><div style="font-size:24px;letter-spacing:-1px;font-weight:850;margin:14px 0 5px" id="homeReviewTier">紅海會員</div><p class="tiny" id="homeReviewDesc">依現有紀錄，顯示下次定級時的門檻進度。</p><button class="btn soft wide" type="button" data-page="forecast" style="margin-top:16px">查看保級與升級預測 ↗</button></div></div>
+      <div class="grid2"><div class="card"><div class="headingrow"><h3>下一個目標</h3><span class="labelchip good" id="homeNextLabel">銀海會員</span></div><div class="min-cost" id="homeCost">NT$ 6,250</div><p class="tiny" id="homePlan">分次達到滿額門檻，能更快累積成長值。</p><details class="plan-details" id="homePlanDetails"><summary>查看每筆消費與成長值明細 <svg class="ico"><use href="#i-chevron-down"></use></svg></summary><div id="homePlanBreakdown"></div></details><div class="kv"><span>升上黑海的建議花費</span><b id="homeBlackCost">—</b></div><div class="softnote">以單筆滿額獎勵安排消費；每筆進位計點，詳細計算可展開查看。</div></div><div class="card"><div class="headingrow"><h3>下一次會員定級</h3><span class="labelchip" id="homeReviewDate">—</span></div><div style="font-size:24px;letter-spacing:-1px;font-weight:850;margin:14px 0 5px" id="homeReviewTier">紅海會員</div><p class="tiny" id="homeReviewDesc">依現有紀錄，顯示下次定級時的門檻進度。</p><button class="btn soft wide" type="button" data-page="forecast" style="margin-top:16px">查看保級與升級預測 ↗</button></div></div>
       <div class="sectionhead"><div><h2>最近消費</h2><p>新紀錄會自動計入成長值</p></div><button type="button" class="btn small" data-page="records">查看全部</button></div>
       <div id="homeRecent" class="rec-list"></div>
     </section>
@@ -356,7 +391,7 @@ input[hidden]{display:none!important}
 
     <section class="page" id="page-entry" aria-labelledby="entryTitle">
       <div class="pagehead"><div><div class="eyebrow">ADD A VISIT</div><h1 id="entryTitle">新增一筆消費</h1><p class="sub">可補登過往消費；日期將影響成長值效期與保級預測</p></div><button type="button" class="btn small" data-page="records">返回紀錄</button></div>
-      <div class="grid2"><div class="card"><form id="recordForm"><div class="formgrid"><div class="field"><label for="rDate">消費日期</label><input id="rDate" type="date" required></div><div class="field"><label for="rAmount">實付金額（NT$）</label><input id="rAmount" type="number" min="0" max="100000000" step="1" inputmode="numeric" value="750" required></div><div class="field"><label for="rStore">消費門市</label><select id="rStore" aria-label="消費門市"></select><input id="rStoreCustom" maxlength="70" placeholder="輸入門市名稱" hidden></div><div class="field"><label for="rExtra">額外活動成長值</label><input id="rExtra" type="number" min="0" max="1000000" step="1" value="0"></div><div class="field"><label for="rActual">實際獲得成長值（選填）</label><input id="rActual" type="number" min="-1000000" max="1000000" step="1" placeholder="留白使用自動計算"><small>填入後以這個數字為準；0 元紀錄可調整負數</small></div><div class="field wide"><label for="rNote">備註</label><textarea id="rNote" maxlength="240" placeholder="例如：生日聚餐、優惠券、點數入帳校正…"></textarea></div></div><div class="result"><div><div style="font-size:12px;font-weight:750">本筆成長值</div><small id="calcDescription">基本 150 點 + 到店 150 點</small></div><b id="livePoints">300</b></div><div class="inputfooter"><button class="btn primary" id="saveRecord" type="submit">儲存紀錄</button><button class="btn" type="button" id="resetRecord">清除</button></div></form></div><aside class="card"><h3>消費怎麼換成長值？</h3><p class="helper">換算規則可隨時於設定調整。</p><div class="kv"><span>每消費 NT$</span><b id="hintUnit">5 元 = 1 點</b></div><div class="kv"><span>單筆滿額</span><b id="hintBonus">$750 加 150 點</b></div><div class="kv"><span>成長值有效視窗</span><b>最近 12 個月</b></div><div class="divider"></div><div class="softnote warn">輸入「實際獲得成長值」即可校正本筆點數；若只要補登活動點數，金額可填 0。</div><div class="softnote" style="margin-top:10px">同一筆結帳只需建立一筆；跨月補登仍依原消費日期計算。</div></aside></div>
+      <div class="grid2"><div class="card"><form id="recordForm"><div class="formgrid"><div class="field"><label for="rDate">消費日期</label><div class="date-shell"><span class="date-face" id="rDateDisplay" aria-hidden="true">選擇日期</span><svg class="ico date-shell-icon" aria-hidden="true"><use href="#i-calendar"></use></svg><input id="rDate" class="date-native" type="date" required aria-label="消費日期"></div></div><div class="field"><label for="rAmount">實付金額（NT$）</label><input id="rAmount" type="number" min="0" max="100000000" step="1" inputmode="numeric" value="750" required></div><div class="field"><label for="rStore">消費門市</label><select id="rStore" aria-label="消費門市"></select><input id="rStoreCustom" maxlength="70" placeholder="輸入門市名稱" hidden></div><div class="field"><label for="rExtra">額外活動成長值</label><input id="rExtra" type="number" min="0" max="1000000" step="1" value="0"></div><div class="field"><label for="rActual">實際獲得成長值（選填）</label><input id="rActual" type="number" min="-1000000" max="1000000" step="1" placeholder="留白使用自動計算"><small>填入後以這個數字為準；0 元紀錄可調整負數</small></div><div class="field wide"><label for="rNote">備註</label><textarea id="rNote" maxlength="240" placeholder="例如：生日聚餐、優惠券、點數入帳校正…"></textarea></div></div><div class="result"><div><div style="font-size:12px;font-weight:750">本筆成長值</div><small id="calcDescription">基本 150 點 + 到店 150 點</small></div><b id="livePoints">300</b></div><div class="inputfooter"><button class="btn primary" id="saveRecord" type="submit">儲存紀錄</button><button class="btn" type="button" id="resetRecord">清除</button></div></form></div><aside class="card"><h3>消費怎麼換成長值？</h3><p class="helper">換算規則可隨時於設定調整。</p><div class="kv"><span>每消費 NT$</span><b id="hintUnit">5 元 = 1 點</b></div><div class="kv"><span>單筆滿額</span><b id="hintBonus">$750 加 150 點</b></div><div class="kv"><span>成長值有效視窗</span><b>最近 12 個月</b></div><div class="divider"></div><div class="softnote warn">輸入「實際獲得成長值」即可校正本筆點數；若只要補登活動點數，金額可填 0。</div><div class="softnote" style="margin-top:10px">同一筆結帳只需建立一筆；跨月補登仍依原消費日期計算。</div></aside></div>
     </section>
 
     <section class="page" id="page-tiers" aria-labelledby="tiersTitle">
@@ -369,7 +404,7 @@ input[hidden]{display:none!important}
       <div class="pagehead"><div><div class="eyebrow">FUTURE PROJECTION</div><h1 id="forecastTitle">升級與保級預測</h1><p class="sub">以歷史每筆日期滾動計算，模擬未來會員等級</p></div><span class="topbadge">24 個月成長計畫</span></div>
       <div class="forecast-summary"><div class="forecast-kpi"><label>目前有效成長值</label><b id="forecastCurrent">0</b><small>按今天往回 12 個月</small></div><div class="forecast-kpi"><label>下一等級缺口</label><b id="forecastGap">2,500</b><small id="forecastGapLabel">距離銀海會員</small></div><div class="forecast-kpi"><label>首次保級門檻風險</label><b id="forecastRisk">尚無</b><small id="forecastRiskDesc">從現有等級出發</small></div></div>
       <div class="sectionhead"><div><h2>規劃你的未來消費</h2><p>輸入預計每月來店次數與每次消費，系統生成 24 個月情境</p></div></div>
-      <div class="grid2"><div class="card"><form id="forecastForm"><div class="formgrid"><div class="field"><label for="fVisits">每月預計消費次數</label><input id="fVisits" type="number" min="0" max="60" step="1" value="2" required></div><div class="field"><label for="fAmount">平均每次花費（NT$）</label><input id="fAmount" type="number" min="0" max="10000000" step="1" value="750" required></div><div class="field wide"><label for="fStart">計畫開始月份</label><input id="fStart" type="month" required><small>預設下個月；用餐日期平均分散於每月</small></div></div><div class="result"><div><div style="font-size:12px;font-weight:750">每月預計新增成長值</div><small id="fHint">每次 300 點 × 2 次</small></div><b id="fMonthly">600</b></div><button class="btn primary wide" type="submit" style="margin-top:13px">更新升級與保級預測</button></form></div><div class="card"><h3>升級里程碑預測</h3><p class="helper">依選擇的固定月消費計畫，定級日達標時顯示</p><div id="upgradePredictions" class="milestones"></div><div class="softnote warn">這是規劃資料，不會加入消費紀錄。若停止消費，舊成長值仍會移出近 12 個月範圍。</div></div></div>
+      <div class="grid2"><div class="card"><form id="forecastForm"><div class="formgrid"><div class="field"><label for="fVisits">每月預計消費次數</label><input id="fVisits" type="number" min="0" max="60" step="1" value="2" required></div><div class="field"><label for="fAmount">平均每次花費（NT$）</label><input id="fAmount" type="number" min="0" max="10000000" step="1" value="750" required></div><div class="field wide"><label for="fStart">計畫開始月份</label><div class="date-shell"><span class="date-face" id="fStartDisplay" aria-hidden="true">選擇月份</span><svg class="ico date-shell-icon" aria-hidden="true"><use href="#i-calendar"></use></svg><input id="fStart" class="date-native" type="month" required aria-label="計畫開始月份"></div><small>預設下個月；用餐日期平均分散於每月</small></div></div><div class="result"><div><div style="font-size:12px;font-weight:750">每月預計新增成長值</div><small id="fHint">每次 300 點 × 2 次</small></div><b id="fMonthly">600</b></div><button class="btn primary wide" type="submit" style="margin-top:13px">更新升級與保級預測</button></form></div><div class="card"><h3>升級里程碑預測</h3><p class="helper">依選擇的固定月消費計畫，定級日達標時顯示</p><div id="upgradePredictions" class="milestones"></div><div class="softnote warn">這是規劃資料，不會加入消費紀錄。若停止消費，舊成長值仍會移出近 12 個月範圍。</div></div></div>
       <div class="sectionhead"><div><h2>不再消費的保級風險</h2><p>假設從現在起不再新增成長值，觀察未來每月 1 日的門檻變化</p></div></div>
       <div class="card"><div class="headingrow"><div><h3 id="noSpendTitle">目前尚未達銀海</h3><p class="helper" id="noSpendDescription">補齊歷史紀錄後可看出到期變動</p></div><span class="labelchip warn" id="noSpendBadge">保級提醒</span></div><div id="expiryList" class="rec-list"></div><div id="keepCostBox" class="result" hidden><div><div style="font-size:12px;font-weight:750">保住目前等級的建議補差花費</div><small id="keepCostDescription">依保級月份的缺口計算</small></div><b id="keepCost">—</b></div></div>
       <div class="sectionhead"><div><h2>未來 12 次定級對照</h2><p>每月 1 日統計之前 12 個完整月份；比較「停止消費」與「計畫消費」</p></div></div>
@@ -492,6 +527,29 @@ input[hidden]{display:none!important}
     let high=0;for(const d of dates){const points=rolling(d);high=Math.max(high,points);for(let lv=1;lv<4;lv++)if(first[lv]===null&&points>=threshold(lv))first[lv]=d;}
     return {first,high};
   }
+
+  // The visible date is our own text, not iOS Safari's font/padding-dependent native rendering.
+  function syncDateDisplay(){
+    const d=$('rDate').value,m=$('fStart').value;
+    $('rDateDisplay').textContent=/^\d{4}-\d{2}-\d{2}$/.test(d)?d.replaceAll('-','/'):'選擇日期';
+    $('fStartDisplay').textContent=/^\d{4}-\d{2}$/.test(m)?m.replace('-','/'):'選擇月份';
+  }
+  function planDetails(mp){
+    if(!mp.visits)return '<div class="plan-formula">已達到這個等級的成長值門檻。</div>';
+    const s=state.settings,rows=[];
+    const allThreshold=mp.visits>1&&mp.last===s.threshold;
+    const baseTimes=allThreshold?mp.visits:mp.baseVisits;
+    if(baseTimes>0){
+      const pts=getPoints({amount:s.threshold,channel:'dinein',extra:0,actual:null});
+      rows.push(`<div class="plan-line"><div>${fmt(baseTimes)} 次，每次 ${money(s.threshold)}<span class="explain">每次：基本 ${fmt(Math.ceil(s.threshold/s.unit))} + 滿額 ${fmt(s.bonus)} = ${fmt(pts)} 點</span></div><strong>${fmt(baseTimes*pts)} 點</strong></div>`);
+    }
+    const last=allThreshold?0:mp.last,base=Math.ceil(last/s.unit),bonus=last>=s.threshold?s.bonus:0;
+    if(last>0)rows.push(`<div class="plan-line"><div>${mp.baseVisits?'最後 1 次':'消費 1 次'} ${money(last)}<span class="explain">基本 ${fmt(base)} + 滿額 ${fmt(bonus)}</span></div><strong>${fmt(base+bonus)} 點</strong></div>`);
+    const totalPoints=baseTimes*getPoints({amount:s.threshold,channel:'dinein',extra:0,actual:null})+base+bonus;
+    rows.push(`<div class="plan-line plan-total"><div>合計 ${fmt(mp.visits)} 次、${money(mp.cost)}</div><strong>${fmt(totalPoints)} 點</strong></div>`);
+    rows.push(`<div class="plan-formula">計算方式：基本點數為「消費金額 ÷ ${fmt(s.unit)}」向上取整；單筆達 ${money(s.threshold)} 時再加 ${fmt(s.bonus)} 點。此組合優先利用滿額獎勵。</div>`);
+    return rows.join('');
+  }
   function minPlan(need){
     if(need<=0)return{cost:0,visits:0,baseVisits:0,last:0};
     const {unit,threshold:thr,bonus}=state.settings;
@@ -506,7 +564,7 @@ input[hidden]{display:none!important}
     }
     return best;
   }
-  function planLabel(r){if(r.visits===0)return'已達成目標';if(r.visits===1)return`單次消費 ${money(r.cost)}`;if(r.baseVisits===0)return`單次消費 ${money(r.cost)}`;return`${r.baseVisits} 次消費 ${money(state.settings.threshold)}，再 1 次 ${money(r.last)}`;}
+  function planLabel(r){if(r.visits===0)return'已達成目標';if(r.visits===1)return`單次消費 ${money(r.cost)}`;if(r.last===state.settings.threshold)return`${r.visits} 次消費 ${money(r.last)}`;if(r.baseVisits===0)return`單次消費 ${money(r.cost)}`;return`${r.baseVisits} 次消費 ${money(state.settings.threshold)}，再 1 次 ${money(r.last)}`;}
   function recordHTML(r){
     const point=getPoints(r);const now=localISO();const cutoff=subtractMonths(now,12);
     const tag=r.date>now?'未來':r.date<cutoff?'已過 12 個月':'有效';
@@ -531,7 +589,7 @@ input[hidden]{display:none!important}
     const review=nextReview();$('statReview').textContent=review.slice(5).replace('-','/');
     $('homeTiers').innerHTML=names.map((n,i)=>`<div class="tierstep ${colors[i]} ${i>0&&!ach.first[i]?'locked':''}"><div class="symbol">${iconHTML(icons[i])}</div><b>${n}</b><small>${i===0||ach.first[i]?'✓ 已解鎖':fmt(threshold(i))+' 點'}</small></div>`).join('');
     $('homeNextLabel').textContent=lvl===3?'黑海保級中':tierName(next);
-    const mp=minPlan(needed);$('homeCost').textContent=money(mp.cost);$('homeBlackCost').textContent=money(minPlan(Math.max(0,threshold(3)-points)).cost);$('homePlan').textContent=lvl===3?'已達最高等級，可查看保級進度。':`${planLabel(mp)}，可獲得至少 ${fmt(needed)} 點。`;
+    const mp=minPlan(needed);$('homeCost').textContent=money(mp.cost);$('homeBlackCost').textContent=money(minPlan(Math.max(0,threshold(3)-points)).cost);$('homePlan').textContent=lvl===3?'已達最高等級，可查看保級進度。':`${planLabel(mp)}，可獲得至少 ${fmt(needed)} 點。`;$('homePlanBreakdown').innerHTML=planDetails(mp);
     $('homeReviewDate').textContent=review;$('homeReviewTier').textContent=tierName(level(rolling(review,state.records,true)));
     $('homeReviewDesc').textContent=`假設不再新增消費，${review} 定級時計入 ${fmt(rolling(review,state.records,true))} 點。`;
     const latest=[...state.records].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,3);
@@ -621,14 +679,14 @@ input[hidden]{display:none!important}
     if(location.hash!=='#'+to)history.replaceState(null,'','#'+to);
     $('mainViewport').scrollTo({top:0,behavior:'instant'});
   }
-  function resetEntry(){editId=null;$('recordForm').reset();$('rDate').value=localISO();$('rAmount').value=750;$('rExtra').value=0;$('rActual').value='';setStoreSelect('rStore','rStoreCustom','');$('entryTitle').textContent='新增一筆消費';$('saveRecord').textContent='儲存紀錄';renderEntryPreview();}
+  function resetEntry(){editId=null;$('recordForm').reset();$('rDate').value=localISO();syncDateDisplay();$('rAmount').value=750;$('rExtra').value=0;$('rActual').value='';setStoreSelect('rStore','rStoreCustom','');$('entryTitle').textContent='新增一筆消費';$('saveRecord').textContent='儲存紀錄';renderEntryPreview();}
   function renderEntryPreview(){const amount=Math.max(0,int($('rAmount').value)),extra=Math.max(0,int($('rExtra').value)),channel=amount===0?'adjust':'dinein',actual=$('rActual').value.trim()===''?null:int($('rActual').value);const r={amount,extra,channel,actual};const value=getPoints(r),s=state.settings,base=Math.ceil(amount/s.unit);const bonus=channel==='dinein'&&amount>=s.threshold?s.bonus:0;$('livePoints').textContent=(value<0?'':'+')+fmt(value);$('calcDescription').textContent=actual!==null?'以輸入的實際成長值為準':`基本 ${fmt(base)} + 滿額 ${fmt(bonus)} + 活動 ${fmt(extra)} 點`;}
   function saveEntry(evt){evt.preventDefault();const date=$('rDate').value,amount=int($('rAmount').value,-1),channel=amount===0?'adjust':'dinein',extra=int($('rExtra').value,-1),str=$('rActual').value.trim(),actual=str===''?null:int(str,NaN);if(!validDate(date)||amount<0||amount>100000000||extra<0||extra>1000000||(actual!==null&&(!Number.isFinite(actual)||Math.abs(actual)>1000000))||(actual!==null&&actual<0&&amount!==0))return toast('請檢查日期、消費金額與成長值');if(amount===0&&actual===null&&extra===0)return toast('請輸入消費金額或調整的成長值');
     const r={id:editId||cryptoId(),date,amount,channel,extra,actual,store:getStoreValue('rStore','rStoreCustom').slice(0,70),note:$('rNote').value.trim().slice(0,240)};
     if(editId){const i=state.records.findIndex(x=>x.id===editId);if(i<0)return toast('找不到編輯的紀錄');state.records[i]=r;}else state.records.push(r);
     save();render();resetEntry();navigate('records');toast('已儲存消費紀錄');
   }
-  function editRecord(id){const r=state.records.find(x=>x.id===id);if(!r)return toast('找不到這筆紀錄');editId=r.id;$('entryTitle').textContent='編輯消費紀錄';$('saveRecord').textContent='儲存修改';$('rDate').value=r.date;$('rAmount').value=r.amount;setStoreSelect('rStore','rStoreCustom',r.store);$('rExtra').value=r.extra;$('rActual').value=r.actual??'';$('rNote').value=r.note;renderEntryPreview();navigate('entry');}
+  function editRecord(id){const r=state.records.find(x=>x.id===id);if(!r)return toast('找不到這筆紀錄');editId=r.id;$('entryTitle').textContent='編輯消費紀錄';$('saveRecord').textContent='儲存修改';$('rDate').value=r.date;syncDateDisplay();$('rAmount').value=r.amount;setStoreSelect('rStore','rStoreCustom',r.store);$('rExtra').value=r.extra;$('rActual').value=r.actual??'';$('rNote').value=r.note;renderEntryPreview();navigate('entry');}
   function deleteRecord(id){const r=state.records.find(x=>x.id===id);if(!r)return;if(!confirm(`確定刪除 ${r.date} 的 ${r.store||'消費紀錄'}？此操作無法復原。`))return;state.records=state.records.filter(x=>x.id!==id);save();render();toast('已刪除紀錄');}
   function initStoreOptions(){
     const make=(el,placeholder)=>{el.innerHTML='';const o=document.createElement('option');o.value='';o.textContent=placeholder;el.appendChild(o);for(const [area,...stores] of STORES){const group=document.createElement('optgroup');group.label=area;for(const name of stores){const opt=document.createElement('option');opt.value=name;opt.textContent=name;group.appendChild(opt);}el.appendChild(group);}const custom=document.createElement('option');custom.value='__custom__';custom.textContent='其他／自訂門市';el.appendChild(custom);};
@@ -680,7 +738,7 @@ input[hidden]{display:none!important}
   function erase(){if(!confirm('確定刪除所有消費、名片與設定？無法復原，建議先備份。'))return;if(!confirm('最後確認：真的要將本機資料全部清空，從 0 點重新開始？'))return;state=clone(DEFAULT);save();render();resetEntry();navigate('home');toast('資料已清空');}
   document.addEventListener('click',e=>{const go=e.target.closest('[data-page]');if(go){if(go.dataset.page==='entry')resetEntry();if(go.dataset.page==='card-entry')resetCard();navigate(go.dataset.page);return;}const edit=e.target.closest('[data-edit]');if(edit){editRecord(edit.dataset.edit);return;}const del=e.target.closest('[data-delete]');if(del){deleteRecord(del.dataset.delete);return;}const ec=e.target.closest('[data-edit-card]');if(ec){editCard(ec.dataset.editCard);return;}const dc=e.target.closest('[data-delete-card]');if(dc){deleteCard(dc.dataset.deleteCard);return;}const cp=e.target.closest('[data-copy-line]');if(cp){copyLine(cp.dataset.copyLine);return;}});
   $('cardForm').addEventListener('submit',saveCard);$('resetCard').addEventListener('click',resetCard);$('searchCards').addEventListener('input',renderCards);$('filterCards').addEventListener('change',renderCards);
-  $('recordForm').addEventListener('submit',saveEntry);$('recordForm').addEventListener('input',renderEntryPreview);$('recordForm').addEventListener('change',renderEntryPreview);$('resetRecord').addEventListener('click',resetEntry);
+  $('rDate').addEventListener('input',syncDateDisplay);$('rDate').addEventListener('change',syncDateDisplay);$('fStart').addEventListener('input',syncDateDisplay);$('fStart').addEventListener('change',syncDateDisplay);$('recordForm').addEventListener('submit',saveEntry);$('recordForm').addEventListener('input',renderEntryPreview);$('recordForm').addEventListener('change',renderEntryPreview);$('resetRecord').addEventListener('click',resetEntry);
   $('searchRecords').addEventListener('input',renderRecords);$('filterRecords').addEventListener('change',renderRecords);
   $('settingsForm').addEventListener('submit',saveSettings);$('forecastForm').addEventListener('submit',updatePlan);$('fVisits').addEventListener('input',()=>{const n=Math.max(0,int($('fVisits').value)),amount=Math.max(0,int($('fAmount').value));$('fMonthly').textContent=fmt(n*getPoints({amount,channel:'dinein',extra:0,actual:null}));});$('fAmount').addEventListener('input',()=>{const n=Math.max(0,int($('fVisits').value)),amount=Math.max(0,int($('fAmount').value));$('fMonthly').textContent=fmt(n*getPoints({amount,channel:'dinein',extra:0,actual:null}));});
   $('exportCSV').addEventListener('click',exportCSV);$('settingCSV').addEventListener('click',exportCSV);$('exportJSON').addEventListener('click',exportJSON);$('settingJSON').addEventListener('click',exportJSON);$('settingImport').addEventListener('click',()=>$('importFile').click());$('importFile').addEventListener('change',importFile);$('settingErase').addEventListener('click',erase);
@@ -703,7 +761,7 @@ input[hidden]{display:none!important}
   // Fixed iOS layouts should bring focused inputs into the content pane when the keyboard appears.
   document.addEventListener('focusin',e=>{if(e.target.matches('input,select,textarea'))setTimeout(()=>e.target.scrollIntoView({block:'nearest',behavior:'instant'}),200);});
   window.addEventListener('hashchange',()=>navigate(location.hash.slice(1)));
-  initStoreOptions();load();$('fStart').value=plan.start;$('fVisits').value=plan.visits;$('fAmount').value=plan.amount;resetEntry();render();navigate(location.hash.slice(1)||'home');
+  initStoreOptions();load();$('fStart').value=plan.start;syncDateDisplay();$('fVisits').value=plan.visits;$('fAmount').value=plan.amount;resetEntry();render();navigate(location.hash.slice(1)||'home');
 })();
 </script>
 </body>
